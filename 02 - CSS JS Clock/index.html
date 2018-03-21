@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+    <div class="clock">
+      <div class="clock-face">
+        <div class="hand hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand second-hand"></div>
+      </div>
+    </div>
+
+
+
+  <script>
+    var secondHand = document.querySelector('.second-hand');
+    var minuteHand = document.querySelector('.min-hand');
+    var hourHand = document.querySelector('.hour-hand');
+
+    var skipTransition = false;
+    var initialDraw = true;
+
+    function updateHands() {
+      var now = new Date();
+
+      var secondsAngle = ((360 / 60) * now.getSeconds() + 90) % 360;
+      var minutesAngle = ((360 / 60) * now.getMinutes() + 90) % 360;
+      var hoursAngle = ((360 / 12) * now.getHours() + 90) % 360;
+
+
+      // TODO: improve and make a functional block to apply to any hand
+      // avoid flickering when moving from 360 to 0
+      if(secondsAngle === 0 || initialDraw) {
+        skipTransition = true;
+        initialDraw = false;
+        secondHand.style.transition = 'all 0s';
+      }
+      else if(skipTransition) { // put it back
+        skipTransition = false;
+        secondHand.style.transition = 'all 0.1s';
+        secondHand.style.transitionTimingFunction = 'cubic-bezier(0.42, 0, 0, 2.36)';
+      }
+
+      secondHand.style.transform = "rotate(" + secondsAngle + "deg)";
+      minuteHand.style.transform = "rotate(" + minutesAngle + "deg)";
+      hourHand.style.transform = "rotate(" + hoursAngle + "deg)";
+    }
+
+    setInterval(updateHands, 1000);
+  </script>
+</body>
+</html>

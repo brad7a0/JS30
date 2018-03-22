@@ -1,0 +1,39 @@
+:root {
+    --spacing: 10px;
+    --blur: 10px;
+    --color: lightgreen;
+}
+
+body {
+    text-align: center;
+    margin: 30px 10px;
+    background: slategray;
+    color: ivory;
+    font-family: monospace;
+    font-size: 20px;
+}
+
+h2 {
+    font-family:sans-serif;
+}
+
+.hl {
+    color: var(--color);
+}
+
+img {
+    margin: 30px;
+    border: 10px solid var(--color);
+    border-radius: 5px;
+    filter: blur(var(--blur));
+    padding: var(--spacing);
+}
+
+label, input {
+    margin-top: 15px;
+}
+
+label {
+    margin-left: 20px;
+    margin-right: 8px;
+}
